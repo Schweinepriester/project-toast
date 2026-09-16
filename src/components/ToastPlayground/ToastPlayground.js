@@ -42,7 +42,7 @@ function ToastPlayground() {
               const id = `variant-${option}`
 
               return (
-                  <label htmlFor={id} key={option}>
+                  <label htmlFor={id} key={id}>
                     <input
                         id={id}
                         type="radio"
