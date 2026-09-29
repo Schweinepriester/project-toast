@@ -8,12 +8,13 @@ import styles from './ToastPlayground.module.css';
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
+  const [isRendered , setIsRendered] = React.useState(false);
+
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const [isVisible, setIsVisible] = React.useState(false);
 
-  const handleDismiss = function () {
-    setIsVisible(false);
+  function handleDismiss() {
+    setIsRendered(false);
   }
 
   return (
@@ -23,9 +24,14 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast variant={variant} isVisible={isVisible} handleDismiss={handleDismiss}>
-        {message}
-      </Toast>
+      {isRendered && (
+          <Toast
+              variant={variant}
+              handleDismiss={handleDismiss}
+          >
+            {message}
+          </Toast>
+      )}
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
