@@ -39,7 +39,10 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toastStack} handleDismiss={handleDismiss} />
+      <ToastShelf
+          toasts={toastStack}
+          handleDismiss={handleDismiss}
+      />
 
       <form className={styles.controlsWrapper} onSubmit={(event) => {
         event.preventDefault();
