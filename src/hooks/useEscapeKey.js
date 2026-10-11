@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO generalize
 export function useEscapeKey(callback) {
     React.useEffect(() => {
         function handleKeyDown(event) {
