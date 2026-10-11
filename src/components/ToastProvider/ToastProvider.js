@@ -2,14 +2,11 @@ import React from 'react';
 
 export const ToastContext = React.createContext();
 
-function ToastProvider({ children }) {
-  const initialToasts = [];
-  const [toasts, setToasts] = React.useState(initialToasts);
-
+function useEscapeKey(callback) {
   React.useEffect(() => {
     function handleKeyDown(event) {
       if (event.code === 'Escape') {
-        setToasts(initialToasts);
+        callback(event);
       }
     }
 
@@ -18,7 +15,18 @@ function ToastProvider({ children }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
+  }, [callback]);
+}
+
+function ToastProvider({ children }) {
+  const initialToasts = [];
+  const [toasts, setToasts] = React.useState(initialToasts);
+
+  const handleEscape = React.useCallback(() => {
+    setToasts([]);
   }, []);
+
+  useEscapeKey(handleEscape);
 
   function handleDismiss(id) {
     setToasts(toasts.filter((toast) => toast.id !== id))
